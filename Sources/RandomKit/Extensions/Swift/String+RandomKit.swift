@@ -144,12 +144,12 @@ extension String: Shuffleable, UniqueShuffleable {
 
     /// Shuffles the elements in `self` and returns the result.
     public func shuffled<R: RandomGenerator>(using randomGenerator: inout R) -> String {
-        return String(self.shuffled(using: &randomGenerator))
+        return String(Array(self).shuffled(using: &randomGenerator))
     }
 
     /// Shuffles the elements in `self` in a unique order and returns the result.
     public func shuffledUnique<R: RandomGenerator>(using randomGenerator: inout R) -> String {
-        return String(self.shuffledUnique(using: &randomGenerator))
+        return String(Array(self).shuffledUnique(using: &randomGenerator))
     }
 
 }

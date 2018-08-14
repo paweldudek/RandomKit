@@ -33,16 +33,6 @@ public protocol RandomInClosedRange: Comparable {
 
 }
 
-extension RandomInClosedRange where Self: Strideable & Comparable, Self.Stride : SignedInteger {
-
-    /// Returns a random value of `Self` inside of the closed range.
-    public static func random<R: RandomGenerator>(in closedRange: CountableClosedRange<Self>,
-                                                  using randomGenerator: inout R) -> Self {
-        return random(in: ClosedRange(closedRange), using: &randomGenerator)
-    }
-
-}
-
 extension RandomInClosedRange {
 
     #if swift(>=3.2)
