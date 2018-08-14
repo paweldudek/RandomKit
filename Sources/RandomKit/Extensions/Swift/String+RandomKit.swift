@@ -85,35 +85,6 @@ extension String: Random {
         return String(result)
     }
 
-    #if swift(>=4.0)
-    // No character view for you
-    #else
-    /// Generates a random `String` with a length of `10` from `characters`.
-    ///
-    /// - parameter characters: The characters from which the string will be generated.
-    /// - parameter randomGenerator: The random generator to use.
-    public static func random<R: RandomGenerator>(from characters: CharacterView,
-                              using randomGenerator: inout R) -> String? {
-        return random(ofLength: 10, from: characters, using: &randomGenerator)
-    }
-
-    /// Generates a random `String` of a given length from `characters`.
-    ///
-    /// - parameter length: The length for the generated string.
-    /// - parameter characters: The characters from which the string will be generated.
-    /// - parameter randomGenerator: The random generator to use.
-    public static func random<I: ExpressibleByIntegerLiteral & Strideable, R: RandomGenerator>(ofLength length: I,
-                              from characters: CharacterView,
-                              using randomGenerator: inout R) -> String? where I.Stride: SignedInteger {
-        var result = ""
-        for _ in 0 ..< length {
-            let random = self.random(using: &randomGenerator)
-            result.append(random)
-        }
-        return result
-    }
-    #endif
-
     /// Generates a random `String` with a length of `10` from `scalars`.
     ///
     /// - parameter scalars: The unicode scalars from which the string will be generated.
@@ -163,11 +134,7 @@ extension String: Random {
 
 }
 
-#if swift(>=4.0)
 extension String: RandomRetrievableInRange {}
-#else
-extension String.CharacterView: RandomRetrievableInRange {}
-#endif
 
 extension String.UnicodeScalarView: RandomRetrievableInRange {}
 extension String.UTF8View: RandomRetrievableInRange {}
